@@ -13,7 +13,7 @@ using PaymentContext.Shared.Handlers;
 namespace PaymentContext.Domain.Handlers
 {
     public class SubscriptionHandler :
-        Notifiable,
+        Notifiable<Notification>,
         IHandler<CreateBoletoSubscriptionCommand>,
         IHandler<CreatePaypalSubscriptionCommand>
     {
@@ -30,7 +30,7 @@ namespace PaymentContext.Domain.Handlers
         {
             // Fail Fest Validations
             command.Validate();
-            if(command.Invalid)
+            if(!command.IsValid)
             {
                 AddNotifications(command);
                 return new CommandResult(false,"Não foi possível realizar sua assinatura");
@@ -73,7 +73,7 @@ namespace PaymentContext.Domain.Handlers
             AddNotifications(name, document, email, address, student, subscription, payment);
 
             // Checar as notificações
-            if(Invalid)
+            if(!command.IsValid)
                 return new CommandResult(false, "Não foi possivel realizar sua assinatura");
 
             // Salvar as informações

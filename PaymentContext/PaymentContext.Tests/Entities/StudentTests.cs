@@ -36,7 +36,7 @@ namespace PaymentContext.Tests.Entities
             _student.AddSubscription(_subscription);
             _student.AddSubscription(_subscription);
 
-            Assert.IsTrue(_student.Invalid);
+            Assert.IsTrue(!_student.IsValid);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace PaymentContext.Tests.Entities
             
             _student.AddSubscription(_subscription);
 
-            Assert.IsTrue(_student.Invalid);
+            Assert.IsTrue(!_student.IsValid);
         }
 
 
@@ -57,7 +57,7 @@ namespace PaymentContext.Tests.Entities
            _subscription.AddPayment(payment);
            _student.AddSubscription(_subscription);
 
-           Assert.IsTrue(_student.Valid); 
+           Assert.IsTrue(_student.IsValid); 
         }
     }
 }

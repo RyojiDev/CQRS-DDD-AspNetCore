@@ -6,7 +6,7 @@ using PaymentContext.Shared.Commands;
 
 namespace PaymentContext.Domain.Commands
 {
-    public class CreateBoletoSubscriptionCommand : Notifiable, ICommand
+    public class CreateBoletoSubscriptionCommand : Notifiable<Notification>, ICommand
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -36,10 +36,10 @@ namespace PaymentContext.Domain.Commands
 
         public void Validate()
         {
-            AddNotifications(new Contract()
-                .Requires()
-                .HasMinLen(FirstName, 3, "Name.FirstName", "Nome deve conter pelo menos 3 caracteres")
-                .HasMaxLen(FirstName, 40, "Name.FirstName", "Nome deve conter até 40 caracteres")                
+            AddNotifications(new Contract<CreateBoletoSubscriptionCommand>()
+             .Requires()
+                .IsLowerThan(FirstName, 3, "Name.FirstName", "Nome deve conter pelo menos 3 caracteres")
+                .IsGreaterThan(FirstName, 40, "Name.FirstName", "Nome deve conter até 40 caracteres")
             );
         }
     }

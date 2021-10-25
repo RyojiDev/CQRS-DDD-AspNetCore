@@ -14,21 +14,21 @@ namespace PaymentContext.Tests.ValueObjects
         public void ShouldReturnErrorWhenCNPJIsInvalid()
         {
             var doc = new Document("1234", EDocumentType.CNPJ);
-           Assert.IsTrue(doc.Invalid);
+           Assert.IsTrue(!doc.IsValid);
         }
 
         [TestMethod]
           public void ShouldReturnSuccessrWhenCNPJIsValid()
         {
            var doc = new Document("58219012000191", EDocumentType.CNPJ);
-           Assert.IsTrue(doc.Valid);
+           Assert.IsTrue(doc.IsValid);
         }
 
         [TestMethod]
           public void ShouldReturnErrorWhenCPFIsInvalid()
         {
            var doc = new Document("12312344", EDocumentType.CPF);
-           Assert.IsTrue(doc.Invalid);
+           Assert.IsTrue(!doc.IsValid);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace PaymentContext.Tests.ValueObjects
          public void ShouldReturnSuccessrWhenCPFIsValid(string cpf)
         {
            var doc = new Document(cpf, EDocumentType.CPF);
-           Assert.IsTrue(doc.Valid);
+           Assert.IsTrue(doc.IsValid);
         }
     }
 }

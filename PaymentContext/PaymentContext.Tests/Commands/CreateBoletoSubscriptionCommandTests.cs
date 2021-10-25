@@ -13,7 +13,7 @@ namespace PaymentContext.Tests.Commands
             command.FirstName = "";
 
             command.Validate();
-            Assert.AreEqual(false, command.Valid);
+            Assert.AreEqual(false, command.IsValid);
         }
     }
 }
